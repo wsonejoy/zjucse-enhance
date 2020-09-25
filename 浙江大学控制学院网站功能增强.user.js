@@ -30,7 +30,7 @@
     }
 
     function expandIndex() {
-        if (document.URL.match(/^http\:\/\/(www\.)?cse\.zju\.edu\.cn(\/index\.php)?$/)) {
+        if (document.URL.match(/^http\:\/\/(www\.)?cse\.zju\.edu\.cn\/(index\.php)?$/)) {
             var middles = document.getElementsByClassName("middle")
             for (var i = 0; i < middles.length; i++) {
                 if (middles[i].className == 'middle') {
@@ -41,7 +41,7 @@
     }
 
     function highlightTime() {
-        if (document.URL.match(/^http\:\/\/(www\.)?cse\.zju\.edu\.cn(\/index\.php)?$/)) {
+        if (document.URL.match(/^http\:\/\/(www\.)?cse\.zju\.edu\.cn\/(index\.php)?$/)) {
             var today = new Date();
             var sec_in_day = 86400000;
             var threshold = 5;

@@ -13,3 +13,5 @@ http://www.cse.zju.edu.cn/*
 
 ## 用法
 https://greasyfork.org/zh-CN
+
+https://greasyfork.org/zh-CN/scripts/411916

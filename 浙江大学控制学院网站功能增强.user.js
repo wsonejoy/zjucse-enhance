@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         浙江大学控制学院网站功能增强
 // @namespace    zjucse-enhancement
-// @version      1.0
+// @version      1.1
 // @description  1. 增加网页标题. 2. 展开首页所有新闻目录. 3. 高亮显示近期新闻（默认3天）
 // @author       onejoy
 // @match        http://cse.zju.edu.cn/*
@@ -31,12 +31,17 @@
 
     function expandIndex() {
         if (document.URL.match(/^http\:\/\/(www\.)?cse\.zju\.edu\.cn\/(index\.php)?$/)) {
-            var middles = document.getElementsByClassName("middle")
-            for (var i = 0; i < middles.length; i++) {
+            var middles = document.getElementsByClassName("middle");
+            var controls = document.getElementsByClassName("control")[0].children;
+            for (var i = 0; i < middles.length-1; i++) { // -1 because the last .middle is in footer
                 if (middles[i].className == 'middle') {
                     middles[i].className = 'middle on';
                 }
+                middles[i].getElementsByClassName("more")[0].children[0].textContent = controls[i].textContent;
             }
+            document.getElementsByClassName("control")[0].style.display='none';
+            document.getElementsByClassName("left fl left-arrow")[0].style.display='none';
+            document.getElementsByClassName("right fr right-arrow")[0].style.display='none';
         }
     }
 
@@ -46,15 +51,23 @@
             var sec_in_day = 86400000;
             var threshold = 5;
             var times = document.getElementsByClassName("time");
+            var date = new Date(0);
             for (var i = 0; i < times.length; i++) {
-                if (times[i].childElementCount == 2) {
+                if (times[i].childElementCount == 0) {
+                    var year = today.getFullYear();
+                    date = new Date(year + "-" + times[i].textContent);
+                    if (date > today) {
+                        year -= 1;
+                        date = new Date(year + "-" + times[i].textContent);
+                    }
+                } else if (times[i].childElementCount == 2) {
                     var month = times[i].children[0].textContent;
                     var day = times[i].children[1].textContent;
-                    var date = new Date(month + '-' + day);
-                    date.setHours(0);
-                    if (today - date < sec_in_day * threshold) {
-                        times[i].style.color='#FF0000'
+                    date = new Date(month + '-' + day);
                     }
+                date.setHours(0);
+                if (today - date < sec_in_day * threshold) {
+                    times[i].style.color='#FF0000'
                 }
             }
         }

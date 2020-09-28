@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         浙江大学控制学院网站功能增强
 // @namespace    zjucse-enhancement
-// @version      1.1
+// @version      1.2
 // @description  1. 增加网页标题. 2. 展开首页所有新闻目录. 3. 高亮显示近期新闻（默认3天）
 // @author       onejoy
 // @match        http://cse.zju.edu.cn/*

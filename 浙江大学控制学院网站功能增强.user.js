@@ -53,18 +53,11 @@
             var times = document.getElementsByClassName("time");
             var date = new Date(0);
             for (var i = 0; i < times.length; i++) {
-                if (times[i].childElementCount == 0) {
-                    var year = today.getFullYear();
-                    date = new Date(year + "-" + times[i].textContent);
-                    if (date > today) {
-                        year -= 1;
-                        date = new Date(year + "-" + times[i].textContent);
-                    }
-                } else if (times[i].childElementCount == 2) {
+                if (times[i].childElementCount == 2) {
                     var month = times[i].children[0].textContent;
                     var day = times[i].children[1].textContent;
                     date = new Date(month + '-' + day);
-                    }
+                }
                 date.setHours(0);
                 if (today - date < sec_in_day * threshold) {
                     times[i].style.color='#FF0000'
